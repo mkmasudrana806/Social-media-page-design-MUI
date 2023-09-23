@@ -1,7 +1,22 @@
 import styled from "@emotion/styled";
-import { Pets } from "@mui/icons-material";
-import { AppBar, Box, InputBase, Toolbar, Typography } from "@mui/material";
-import React from "react";
+import {
+  Mail,
+  NotificationAdd,
+  Notifications,
+  Pets,
+} from "@mui/icons-material";
+import {
+  AppBar,
+  Avatar,
+  Badge,
+  Box,
+  InputBase,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -17,12 +32,25 @@ const Search = styled("div")(({ theme }) => ({
 }));
 
 const Icons = styled(Box)(({ theme }) => ({
-  backgroundColor: "white",
-  height: "20px",
-  width: "20px",
+  display: "flex",
+  alignItems: "center",
+  gap: "20px",
+  "@media (max-width:600px)": {
+    display: "none",
+  },
+}));
+
+const UserBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  gap: "20px",
+  "@media (min-width: 600px)": {
+    display: "none",
+  },
 }));
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false);
   return (
     <AppBar position="sticky">
       <StyledToolbar>
@@ -33,7 +61,47 @@ const Navbar = () => {
         <Search>
           <InputBase placeholder="search..." />
         </Search>
-        <Icons />
+        <Icons>
+          <Badge badgeContent={4} color="error">
+            <Mail />
+          </Badge>
+          <Badge badgeContent={4} color="error">
+            <Notifications />
+          </Badge>
+          <Avatar
+            sx={{ height: 30, width: 30 }}
+            alt="Travis Howard"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnmnYVuihxMWFwYJFP7_7dlxMLwcra69f7dw&usqp=CAU"
+            onClick={(e) => setOpen(true)}
+          />
+        </Icons>
+        <UserBox>
+          <Avatar
+            sx={{ height: 30, width: 30 }}
+            alt="Travis Howard"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnmnYVuihxMWFwYJFP7_7dlxMLwcra69f7dw&usqp=CAU"
+            onClick={() => setOpen(true)}
+          />
+          <Typography variant="h6">Masud</Typography>
+        </UserBox>
+        <Menu
+          id="demo-positioned-menu"
+          aria-labelledby="demo-positioned-button"
+          open={open}
+          onClose={() => setOpen(false)}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+        >
+          <MenuItem>Profile</MenuItem>
+          <MenuItem>My account</MenuItem>
+          <MenuItem>Logout</MenuItem>
+        </Menu>
       </StyledToolbar>
     </AppBar>
   );
