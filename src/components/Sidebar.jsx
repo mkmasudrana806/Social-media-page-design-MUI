@@ -16,7 +16,6 @@ import {
   ListItemText,
   Switch,
 } from "@mui/material";
-import { indigo } from "@mui/material/colors";
 import React from "react";
 
 const Sidebar = () => {
